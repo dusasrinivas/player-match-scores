@@ -125,7 +125,7 @@ app.get("/players/:playerId/matches", async (request, response) => {
     WHERE
       player_id = ${playerId};`;
 
-  const playerMatches = await db.get(getPlayerMathDetailsQuery);
+  const playerMatches = await db.all(getPlayerMathDetailsQuery);
   response.send(playerMatches);
 });
 
@@ -141,7 +141,7 @@ app.get("/matches/:matchId/players", async (request, response) => {
 
       WHERE match_id= ${matchId};`;
 
-  const playerArray = await db.get(getMatchPlayerQuery);
+  const playerArray = await db.all(getMatchPlayerQuery);
   response.send(playerArray);
 });
 
