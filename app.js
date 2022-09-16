@@ -126,7 +126,13 @@ app.get("/players/:playerId/matches", async (request, response) => {
       player_id = ${playerId};`;
 
   const playerMatches = await db.all(getPlayerMathDetailsQuery);
-  response.send(playerMatches);
+  response.send(
+    playerMatches.map((eachItem) => ({
+      matchId: eachItem.match_id,
+      match: eachItem.match,
+      year: eachItem.year,
+    }))
+  );
 });
 
 app.get("/matches/:matchId/players", async (request, response) => {
